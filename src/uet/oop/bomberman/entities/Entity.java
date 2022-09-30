@@ -13,7 +13,7 @@ public abstract class Entity {
 
     //Tọa độ Y tính từ góc trái trên trong Canvas
     protected int y;
-
+    protected boolean alive = true;
     protected Image img;
 
     //Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
@@ -23,8 +23,25 @@ public abstract class Entity {
         this.img = img;
     }
 
+    public Entity(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     public void render(GraphicsContext gc) {
         gc.drawImage(img, x, y);
     }
     public abstract void update();
+    public boolean isAlive(){
+        return this.alive;
+    }
+    public abstract boolean collide(Entity e);
 }
