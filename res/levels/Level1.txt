@@ -24,12 +24,15 @@ C - số cột của bản đồ
 Tiles:
 # - Wall
 * - Brick
-x - Portal
+x - Portal->Brick
 
 Character:
 p - Bomber
 1 - Balloon
 2 - Oneal
+3 - Doll
+4 - Minvo
+5 - Kondoria
 
 Items:
 b - Bomb Item
