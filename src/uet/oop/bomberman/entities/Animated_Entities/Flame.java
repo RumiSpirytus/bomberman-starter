@@ -11,11 +11,11 @@ public class Flame extends Entity {
     }
     public void flameExplode(){
         // 4 void trai phai tren duoi.
-        Right();
-        Left();
-        Top();
-        Down();
-        createFlame();
+//        Right();
+//        Left();
+//        Top();
+//        Down();
+//        createFlame();
     }
     // 4 void trai phai tren duoi.
     // createFlame.

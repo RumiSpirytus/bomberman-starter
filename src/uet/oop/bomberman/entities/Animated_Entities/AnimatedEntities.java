@@ -28,7 +28,10 @@ public class AnimatedEntities extends Entity {
     public boolean collide(Entity e) {
         return false;
     }
-
+    public void move(){
+        x = newX;
+        y = newY;
+    }
     public void moveLeft(){
         newX = x - velocity;
     }

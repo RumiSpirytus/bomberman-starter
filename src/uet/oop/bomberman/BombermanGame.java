@@ -167,7 +167,7 @@ public class BombermanGame extends Application {
             enemies.get(i).update();
         }
         bomber.update();
-        //List<Bomb> bombs = bomber.getBombs();
+        List<Bomb> bombs = bomber.getBombs();
         for(int i = 0; i< bombs.size(); i++){
             bombs.get(i).update();
         }

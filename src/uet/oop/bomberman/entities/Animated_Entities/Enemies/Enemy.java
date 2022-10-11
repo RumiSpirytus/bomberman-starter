@@ -3,6 +3,7 @@ package uet.oop.bomberman.entities.Animated_Entities.Enemies;
 import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.Animated_Entities.AnimatedEntities;
+import uet.oop.bomberman.entities.Animated_Entities.Bomb;
 import uet.oop.bomberman.entities.Animated_Entities.Bomber;
 import uet.oop.bomberman.entities.Animated_Entities.Flame;
 import uet.oop.bomberman.entities.Entity;
@@ -10,7 +11,7 @@ import uet.oop.bomberman.entities.Static_Entities.Brick;
 import uet.oop.bomberman.entities.Static_Entities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 import java.awt.*;
-public class Enemy extends AnimatedEntities {
+public abstract class Enemy extends AnimatedEntities {
     protected int dir; // direction
     protected int animate = 0;
     protected int _x;
@@ -56,6 +57,10 @@ public class Enemy extends AnimatedEntities {
     public void collideCheck(){
         this.collide(BombermanGame.bomber);
     }
+    public abstract void spriteLeft();
+    public abstract void spriteRight();
+    public abstract void spriteUp();
+    public abstract void spriteDown();
     public void update(){
         if(!isAlive()){
             timeToDisappear--;
@@ -64,19 +69,19 @@ public class Enemy extends AnimatedEntities {
         } else {
             collideCheck();
             if(dir == 0){
-                goLeft();
+                moveLeft();
                 spriteLeft();
             }
             if(dir == 1){
-                goRight();
+                moveRight();
                 spriteRight();
             }
             if(dir == 2){
-                goUp();
+                moveUp();
                 spriteUp();
             }
             if(dir == 3){
-                goDown();
+                moveDown();
                 spriteDown();
             }
             calMove();
@@ -87,29 +92,31 @@ public class Enemy extends AnimatedEntities {
         super.stay();
         chooseDir();
     }
-    public void calMove(){
-        for(Enemy e : BombermanGame.enemies){
-            if(e.bound().intersects(o.bound())){
-                e.stay();
-            }
-        }
-        for(Enemy o : BombermanGame.enemies){
-            if(e.quals(o)) continue;
-            if(e instanceof Ghost || o instanceof Ghost) continue;
-            if(e.bound().intersects(o.bound())){
-                if(e.collide(o)){
-                    e.move();
-                } else {
+    public void calMove() {
+        for (Enemy e : BombermanGame.enemies) {
+            for (Bomb o : Bomber.bombs) {
+                if (e.bound().intersects(o.bound())) {
                     e.stay();
+                }
+            }
+            for (Enemy o : BombermanGame.enemies) {
+                if (e.equals(o)) continue;
+                if (e instanceof Ghost || o instanceof Ghost) continue;
+                if (e.bound().intersects(o.bound())) {
+                    if (e.collide(o)) {
+                        e.move();
+                    } else {
+                        e.stay();
+                    }
                 }
             }
         }
     }
     public abstract void chooseDir();
-    public abstract void goRight();
-    public abstract void goLeft();
-    public abstract void goUp();
-    public abstract void goDown();
+//    public abstract void spriteRight();
+//    public abstract void spriteLeft();
+//    public abstract void spriteUp();
+//    public abstract void spriteDown();
 
     /**
      * tranh va cham.

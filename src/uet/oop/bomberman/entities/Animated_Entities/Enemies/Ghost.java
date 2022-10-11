@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Ghost extends Enemy{
     public Ghost(int x, int y, Image img) {
         super(x, y, img);
-        speed = 1;
+        velocity = 1;
     }
 
     @Override
@@ -29,10 +29,10 @@ public class Ghost extends Enemy{
                 || newY / Sprite.SCALED_SIZE == (BombermanGame.bomber.getNewY() / Sprite.SCALED_SIZE) - 1) {
             stay();
         }
-        if (dir == 0) goLeft();
-        if (dir == 1) goRight();
-        if (dir == 2) goUp();
-        if (dir == 3) goDown();
+        if (dir == 0) moveLeft();
+        if (dir == 1) moveRight();
+        if (dir == 2) moveUp();
+        if (dir == 3) moveDown();
     }
     public void spriteUp() {
         img = Sprite.movingSprite(Sprite.ghost_left1, Sprite.ghost_left2, Sprite.ghost_left3, up++, 60).getFxImage();
